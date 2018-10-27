@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
-import products, { productState } from './products';
 
+import products, { productState } from './products';
 import ping, { pingState } from './ping';
-import reducermapper from '../reducermapper';
+import users, { usersState } from './users';
+
+import map from '../reducermapper';
 
 export default combineReducers({
-  products: reducermapper(products, productState),
-  ping: reducermapper(ping, pingState),
+  products: map(products, productState),
+  ping: map(ping, pingState),
+  users: map(users, usersState),
 });

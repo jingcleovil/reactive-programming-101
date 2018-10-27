@@ -3,11 +3,17 @@ import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
-    const { ping, doPing } = this.props;
+    const { ping, fetchUsers, users, cancelFetch } = this.props;
+
     return (
       <div>
-        <button onClick={doPing}>
-          PING
+        <button
+          disabled={users.isLoading}
+          onClick={fetchUsers('jingcleovil')}>
+          FETCH
+        </button>
+        <button onClick={cancelFetch}>
+          CANCEL
         </button>
         <hr />
         <br/>
@@ -19,8 +25,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ ping }) => ({
+const mapStateToProps = ({ ping, users }) => ({
   ping,
+  users,
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -29,8 +36,22 @@ const mapDispatchToProps = (dispatch) => {
       type: 'PING',
     })
   }
+
+  const fetchUsers = (username) => () =>
+    dispatch({
+      type: 'FETCH_USERS',
+      payload: username,
+    })
+
+  const cancelFetch = () =>
+    dispatch({
+      type: 'USERS_CANCELLED',
+    })
+
   return {
     doPing,
+    fetchUsers,
+    cancelFetch,
   }
 }
 
