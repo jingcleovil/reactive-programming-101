@@ -18,7 +18,7 @@ class App extends Component {
         <hr />
         <br/>
         <div>
-          { ping.isPinging ? 'PINGING' : ''}
+          {users.isLoading ? 'FETCHING...' : ''}
         </div>
       </div>
     );
